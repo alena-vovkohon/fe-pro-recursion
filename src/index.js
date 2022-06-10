@@ -4,14 +4,22 @@
  * делаем через рекурсию(а других вариантов и нет)
  */
 
+
 export const deepEqual = (obj, anotherObject) => {
 
     let obj1 = Object.keys(obj);
     let obj2 = Object.keys(anotherObject);
+    console.log(obj1);
+    console.log(obj2);
     let obj1Value = Object.values(obj);
     let obj2Value = Object.values(anotherObject);
+    console.log(obj1Value);
+    console.log(obj2Value);
 
-    if (typeof obj !== "object" || typeof anotherObject !== "object") {
+    if (typeof obj !==  typeof anotherObject) {
+        return false;
+    }
+    if (Array.isArray(obj) || Array.isArray(anotherObject)) {
         return false;
     }
 
@@ -19,27 +27,20 @@ export const deepEqual = (obj, anotherObject) => {
         return false;
     }
 
-    if (obj === null || anotherObject === null) {
-        return false;
-    }
-    if (obj === undefined || anotherObject === undefined) {
-        return false;
-    }
-
     for (let i = 0; i < obj1.length; i += 1){
-        if (!obj2.includes(obj1[i]) || !obj2Value.includes(obj1Value[i])) {
-            return false;
-        }
-    }
-
-    for (let i = 0; i < obj1Value.length; i += 1) {
         if (typeof obj[obj1[i]] === "object") {
             return deepEqual(obj[obj1[i]], anotherObject[obj2[i]]);
+        } else {
+            if (!obj2.includes(obj1[i]) || !obj2Value.includes(obj1Value[i])) {
+                return false;
+            }
         }
     }
+
     return true
     
 };
+
 
 /**
  * Принимает объект, возвращает его глубокую копию, то есть ни одно свойство
