@@ -26,7 +26,6 @@ const object2 = {
 
 
 export const deepEqual = (obj, anotherObject) => {
-    // let obj2Key = Object.keys(anotherObject);
     let obj1 = Object.entries(obj);
     let obj2 = Object.entries(anotherObject);
 
@@ -56,7 +55,7 @@ export const deepEqual = (obj, anotherObject) => {
             console.log(obj2[index][1])
             return true;
         } else {
-            return false
+            return false;
         }
     })
 };
