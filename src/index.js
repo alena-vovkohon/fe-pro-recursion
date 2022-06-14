@@ -4,6 +4,27 @@
  * делаем через рекурсию(а других вариантов и нет)
  */
 
+const object1 = {
+    title: "Title",
+    id: 1,
+    objTwo: {
+        name: 'Hi',
+        id: { id: 2 }
+    },
+};
+
+const object2 = {
+    title: "Title",
+    id: 1,
+    objTwo: {
+        name: 'Hi',
+        id: {
+            id: 2,
+            q: 4,
+        },
+    },
+};
+
 export const deepEqual = (obj, anotherObject) => {
     let objFirst = Object.entries(obj);
     let objAnother = Object.entries(anotherObject);
@@ -28,16 +49,31 @@ export const deepEqual = (obj, anotherObject) => {
         return false;
     }
 
-    return objFirst.every(([key, value]) => {
+    return objFirst.every(([key, value], index) => {
         if (typeof value === 'object') {
-            return deepEqual(value, anotherObject[key]);
-
+            console.log('є obj');
+            return deepEqual(value, objAnother[index][1])
+        } else if (key === objAnother[index][0] && value === objAnother[index][1]) {
+            console.log('keys');
+            return true;
         } else {
-            return value === anotherObject[key]
+            return false
         }
     })
 
+
 };
+
+console.log(deepEqual(object1, object2));
+
+    // return objFirst.every(([key, value]) => {
+    //     if (typeof value === 'object') {
+    //         return deepEqual(value, anotherObject[key]);
+
+    //     } else {
+    //         return value === anotherObject[key]
+    //     }
+    // })
 
 /**
  * Принимает объект, возвращает его глубокую копию, то есть ни одно свойство
