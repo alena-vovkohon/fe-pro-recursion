@@ -4,27 +4,6 @@
  * делаем через рекурсию(а других вариантов и нет)
  */
 
-const object1 = {
-    title: "Title",
-    id: 1,
-    objTwo: {
-        name: 'Hi',
-        id: { id: 2 }
-    },
-};
-
-const object2 = {
-    title: "Title",
-    id: 1,
-    objTwo: {
-        name: 'Hi',
-        id: {
-            id: 2,
-        },
-    },
-};
-
-
 export const deepEqual = (obj, anotherObject) => {
     let objFirst = Object.entries(obj);
     let objAnother = Object.entries(anotherObject);
@@ -60,7 +39,6 @@ export const deepEqual = (obj, anotherObject) => {
 
 };
 
-console.log(deepEqual(object1, object2));
 /**
  * Принимает объект, возвращает его глубокую копию, то есть ни одно свойство
  * не является ссылочным у другого объекта, точно возвращает новое.
