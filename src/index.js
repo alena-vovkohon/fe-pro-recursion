@@ -26,12 +26,13 @@ const object2 = {
 
 
 export const deepEqual = (obj, anotherObject) => {
-    let obj1 = Object.entries(obj);
-    let obj2 = Object.entries(anotherObject);
+    let objFirst = Object.entries(obj);
+    let objAnother = Object.entries(anotherObject);
 
     if (obj === null || anotherObject === null) {
         return false;
     }
+
     if (obj === undefined || anotherObject === undefined) {
         return false;
     }
@@ -44,20 +45,37 @@ export const deepEqual = (obj, anotherObject) => {
         return false;
     }
 
-    if (obj1.length !== obj2.length) {
+    if (objFirst.length !== objAnother.length) {
         return false;
     }
 
-    return obj1.every(([key, value], index) => {
+    // return objFirst.every(([key, value], index) => {
+    //     if (typeof value === 'object') {
+    //         return deepEqual(value, objAnother[index][1]);
+
+    //     } else if (key === objAnother[index][0] && value === objAnother[index][1]) {
+    //         console.log(objAnother[index][1])
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // })
+
+    return objFirst.every(([key, value], index) => {
+        let anotherKey = objAnother[index][0];
+        let anotherValue = objAnother[index][1];
+
         if (typeof value === 'object') {
-            return deepEqual(value, obj2[index][1])
-        } else if (key === obj2[index][0] && value === obj2[index][1]) {
-            console.log(obj2[index][1])
+            return deepEqual(value, anotherValue);
+
+        } else if (key === anotherKey && value === anotherValue) {
             return true;
+
         } else {
             return false;
         }
-    })
+    });
+
 };
 
 console.log(deepEqual(object1, object2));
