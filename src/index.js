@@ -49,32 +49,14 @@ export const deepEqual = (obj, anotherObject) => {
         return false;
     }
 
-    // return objFirst.every(([key, value], index) => {
-    //     if (typeof value === 'object') {
-    //         return deepEqual(value, objAnother[index][1]);
-
-    //     } else if (key === objAnother[index][0] && value === objAnother[index][1]) {
-    //         console.log(objAnother[index][1])
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // })
-
-    return objFirst.every(([key, value], index) => {
-        let anotherKey = objAnother[index][0];
-        let anotherValue = objAnother[index][1];
-
+    return objFirst.every(([key, value]) => {
         if (typeof value === 'object') {
-            return deepEqual(value, anotherValue);
-
-        } else if (key === anotherKey && value === anotherValue) {
-            return true;
+            return deepEqual(value, anotherObject[key]);
 
         } else {
-            return false;
+            return value === anotherObject[key]
         }
-    });
+    })
 
 };
 
