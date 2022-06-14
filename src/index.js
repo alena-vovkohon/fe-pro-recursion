@@ -150,16 +150,25 @@ console.log(deepCopy(objOriginal));
  * То есть если у нас объект { name: { bohdan: { name: 'test' } } } вернет ['name', 'bohdan']
  */
 
+let ogjBohdan = { name: { bohdan: { name: 'test' } } }
+
+
 export const getAllObjectKeys = (obj) => {
     let arr = [];
-    for (const i in obj) {
+    if (typeof obj === "object") {
+        for (const i in obj) {
+          console.log(i, obj[i]);
         if (typeof obj[i] === 'object') {
             arr.push(i); 
-            return arr.push(...getAllObjectKeys(obj[i]));
-        } else {
-           return arr.push(i);
+           arr.push(...getAllObjectKeys(obj[i]));
         }
+        else {
+           arr.push(i);
+        }
+    }   
     }
-    let set = new Set(arr);
-    return set;
+   
+    return [...new Set(arr)];
+    // return arr
 };
+console.log(getAllObjectKeys(objOriginal));
