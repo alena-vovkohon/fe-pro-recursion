@@ -26,10 +26,8 @@ export const deepEqual = (obj, anotherObject) => {
 
     return objFirst.every(([key, value], index) => {
         if (typeof value === 'object') {
-            console.log('є obj');
             return deepEqual(value, objAnother[index][1])
         } else if (key === objAnother[index][0] && value === objAnother[index][1]) {
-            console.log('keys');
             return true;
         } else {
             return false
