@@ -66,15 +66,6 @@ export const deepEqual = (obj, anotherObject) => {
 
 console.log(deepEqual(object1, object2));
 
-    // return objFirst.every(([key, value]) => {
-    //     if (typeof value === 'object') {
-    //         return deepEqual(value, anotherObject[key]);
-
-    //     } else {
-    //         return value === anotherObject[key]
-    //     }
-    // })
-
 /**
  * Принимает объект, возвращает его глубокую копию, то есть ни одно свойство
  * не является ссылочным у другого объекта, точно возвращает новое.
